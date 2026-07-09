@@ -1,12 +1,13 @@
+import { NavLink, Link } from 'react-router-dom'
 import { Search, ShoppingCart, Star } from 'lucide-react'
 import { ASSETS } from '../assets'
 
 const NAV_LINKS = [
-  { label: 'Home', emphasis: true },
-  { label: 'Shop', emphasis: false },
-  { label: 'Delivery and payment', emphasis: false },
-  { label: 'Brands', emphasis: false },
-  { label: 'Blog', emphasis: false },
+  { label: 'Home', path: '/' },
+  { label: 'Shop', path: '/shop' },
+  { label: 'Delivery and payment', path: '/delivery-and-payment' },
+  { label: 'Brands', path: '/brands' },
+  { label: 'Blog', path: '/blog' },
 ]
 
 function Badge({ count }: { count: number }) {
@@ -21,25 +22,28 @@ export default function Header() {
   return (
     <header className="shrink-0 relative z-30 w-full px-4 md:px-8 lg:px-12 py-4">
       <div className="flex items-center justify-between">
-        <a href="#" className="animate-fade-in delay-100 shrink-0">
+        <Link to="/" className="animate-fade-in delay-100 shrink-0">
           <img
             src={ASSETS.logo}
             alt="CozyPaws"
             className="w-[130px] h-[33px] lg:w-[205px] lg:h-[52px]"
           />
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8 animate-fade-in delay-200">
           {NAV_LINKS.map((link) => (
-            <a
+            <NavLink
               key={link.label}
-              href="#"
-              className={`text-sm font-medium whitespace-nowrap ${
-                link.emphasis ? 'text-gray-900' : 'text-gray-600'
-              } hover:text-primary transition-colors`}
+              to={link.path}
+              end={link.path === '/'}
+              className={({ isActive }) =>
+                `text-sm font-medium whitespace-nowrap ${
+                  isActive ? 'text-gray-900' : 'text-gray-600'
+                } hover:text-primary transition-colors`
+              }
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 

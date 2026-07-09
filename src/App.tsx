@@ -1,18 +1,22 @@
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
-import HeroDesktop from './components/HeroDesktop'
-import HeroTablet from './components/HeroTablet'
-import HeroMobile from './components/HeroMobile'
+import Home from './pages/Home'
+import Placeholder from './pages/Placeholder'
 
 function App() {
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-background">
-      <Header />
-      <section className="flex-1 min-h-0 overflow-hidden relative">
-        <HeroMobile />
-        <HeroTablet />
-        <HeroDesktop />
-      </section>
-    </div>
+    <HashRouter>
+      <div className="h-screen flex flex-col overflow-hidden bg-background">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Placeholder title="Shop" />} />
+          <Route path="/delivery-and-payment" element={<Placeholder title="Delivery and Payment" />} />
+          <Route path="/brands" element={<Placeholder title="Brands" />} />
+          <Route path="/blog" element={<Placeholder title="Blog" />} />
+        </Routes>
+      </div>
+    </HashRouter>
   )
 }
 
